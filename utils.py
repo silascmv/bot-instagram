@@ -17,11 +17,32 @@ class Utils:
         jsonFile = open(max_file,'r')
         jsonConverted = json.load(jsonFile)
         return jsonConverted
+
+    def getListOfToComment(self,json,qtdUsers,qtdUserPerComment):
+        listOfUsers = json
+        totalList = qtdUsers * qtdUserPerComment
+        i = 0
+        mapOfQntUserPerComment = {}
+        while i < totalList:
+            x = i
+            while x < i + qtdUserPerComment:
+                if i in mapOfQntUserPerComment:
+                    listAux = mapOfQntUserPerComment.get(i)
+                    listAux.append('@{' + listOfUsers[x]+'}')
+                    mapOfQntUserPerComment[i] = listAux
+                else: 
+                    mapOfQntUserPerComment[i] = ['@{' + listOfUsers[x]+'}']
+                x += 1
+                
+            i += qtdUserPerComment
+
+        return mapOfQntUserPerComment
+
         #print(jsonConverted)
         #for x in jsonConverted:
         #    print(x)
 
-    def getListOfToComment(self,json,qtdUsers,qtdUserPerComment):
+        """   def getListOfToComment(self,json,qtdUsers,qtdUserPerComment):
         listOfUsers = json
         totalList = qtdUsers * qtdUserPerComment
         i = 0
@@ -39,10 +60,7 @@ class Utils:
                 
             i += qtdUserPerComment
 
-        return mapOfQntUserPerComment
+        return mapOfQntUserPerComment """
 
 
-
-
-#print(jsonConverted.)
-#print(file)
+    

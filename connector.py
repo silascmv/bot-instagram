@@ -25,7 +25,7 @@ class Connector:
         #print('DEBUG')
         #print(self.listOfUsers)
         self.session.set_quota_supervisor(enabled=True,
-                sleep_after=["likes", "comments_d", "follows", "unfollows", "server_calls_h"],
+                sleep_after=["comments_d", "follows", "unfollows", "server_calls_h"],
                 sleepyhead=True,
                 stochastic_flow=True,
                 notify_me=True,
@@ -53,10 +53,12 @@ class Connector:
                   print('Comentário',cont)
                   print('Usuários',y)
                   cont += 1
-        
-            self.session.set_do_like(False)
+            self.session.set_do_comment(enabled=True, percentage=100)
             self.session.set_comments(["Masterful shot"])
-            self.session.interact_by_URL(urls=["https://www.instagram.com/p/CMVhLZ1rKQt/"])
+            #self.session.set_do_follow(enabled=True, percentage=44)
+            self.session.set_user_interact(amount=qtd, randomize=True, percentage=100, media='Photo')
+            self.session.interact_by_URL(urls=["https://www.instagram.com/p/CMVhLZ1rKQt/"], randomize=True, interact=True, )
+           
     def saveListFollowing(self):
             self.listOfUsers = self.session.grab_following(username=self.username, amount="full", live_match=True, store_locally=True)
             print(self.listOfUsers)
